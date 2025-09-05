@@ -87,6 +87,6 @@ export default function handler(req, res) {
     default:
       return res.status(400).json({ error: "неправильный оператор" });
   }
-
+  console.log(result);
   res.status(200).json({ result });
 }
