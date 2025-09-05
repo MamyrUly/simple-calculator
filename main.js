@@ -7,7 +7,7 @@ async function calculate() {
   output.innerHTML = "";
 
   try {
-    const response = await fetch("api/index", {
+    const response = await fetch("/api/index", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
