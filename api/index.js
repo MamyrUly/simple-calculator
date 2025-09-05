@@ -55,38 +55,49 @@
 // });
 
 export default function handler(req, res) {
-  const { num1, num2, operator } = req.body;
-
-  if (
-    typeof num1 !== "number" ||
-    typeof num2 !== "number" ||
-    isNaN(num1) ||
-    isNaN(num2)
-  ) {
-    return res.status(400).json({ error: "num1 и num2 не числа" });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Метод не разрешен" });
   }
 
-  let result;
+  try {
+    const { num1, num2, operator } =
+      typeof req.body === "string" ? JSON.parse(req.body) : req.body;
 
-  switch (operator) {
-    case "+":
-      result = num1 + num2;
-      break;
-    case "-":
-      result = num1 - num2;
-      break;
-    case "*":
-      result = num1 * num2;
-      break;
-    case "/":
-      if (num2 === 0) {
-        return res.status(400).json({ error: "нельзя делить на ноль" });
-      }
-      result = num1 / num2;
-      break;
-    default:
-      return res.status(400).json({ error: "неправильный оператор" });
+    if (
+      typeof num1 !== "number" ||
+      typeof num2 !== "number" ||
+      isNaN(num1) ||
+      isNaN(num2)
+    ) {
+      return res.status(400).json({ error: "num1 и num2 не числа" });
+    }
+
+    let result;
+
+    switch (operator) {
+      case "+":
+        result = num1 + num2;
+        break;
+      case "-":
+        result = num1 - num2;
+        break;
+      case "*":
+        result = num1 * num2;
+        break;
+      case "/":
+        if (num2 === 0) {
+          return res.status(400).json({ error: "нельзя делить на ноль" });
+        }
+        result = num1 / num2;
+        break;
+      default:
+        return res.status(400).json({ error: "неправильный оператор" });
+    }
+
+    console.log("📌 Результат:", result); // это попадёт в Vercel Function Logs
+    res.status(200).json({ result });
+  } catch (e) {
+    console.error("Ошибка парсинга body:", e);
+    res.status(400).json({ error: "Некорректное тело запроса" });
   }
-  console.log(result);
-  res.status(200).json({ result });
 }

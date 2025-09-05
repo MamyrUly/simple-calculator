@@ -9,12 +9,10 @@ async function calculate() {
   try {
     const response = await fetch("/api/index", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        num1: Number(num1),
-        num2: Number(num2),
-        operator,
-      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ num1: 5, num2: 2, operator: "+" }),
     });
 
     const data = await response.json();
