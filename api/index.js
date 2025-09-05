@@ -55,7 +55,7 @@
 // });
 
 export default function handler(req, res) {
-  const { num1, numb2, operator } = req.body;
+  const { num1, num2, operator } = req.body;
 
   if (
     typeof num1 !== "number" ||
