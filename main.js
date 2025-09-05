@@ -20,7 +20,7 @@ async function calculate() {
     const data = await response.json();
 
     if (response.ok) {
-      output.innerHTML = `<div class="result">ответ ${data.resule}</div>`;
+      output.innerHTML = `<div class="result">ответ ${data.result}</div>`;
     } else {
       output.innerHTML = `<div class="error">ошибка  ${data.error}</div>`;
     }
