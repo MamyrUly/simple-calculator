@@ -20,9 +20,9 @@ async function calculate() {
     const data = await response.json();
 
     if (response.ok) {
-      output.innerHTML = `<div class="result">${data.expression}</div>`;
+      output.innerHTML = `<div class="result">ответ ${data.resule}</div>`;
     } else {
-      output.innerHTML = `<div class="error">${data.error}</div>`;
+      output.innerHTML = `<div class="error">ошибка  ${data.error}</div>`;
     }
   } catch (err) {
     output.innerHTML = `<div class="error">Ошибка соединения с сервером</div>`;
